@@ -895,9 +895,9 @@ ApplicationMain.create = function(config) {
 	ManifestResources.init(config);
 	var _this = app.meta;
 	if(__map_reserved["build"] != null) {
-		_this.setReserved("build","1");
+		_this.setReserved("build","4");
 	} else {
-		_this.h["build"] = "1";
+		_this.h["build"] = "4";
 	}
 	var _this1 = app.meta;
 	if(__map_reserved["company"] != null) {
@@ -5878,7 +5878,7 @@ PlayState.__super__ = flixel_FlxState;
 PlayState.prototype = $extend(flixel_FlxState.prototype,{
 	create: function() {
 		flixel_FlxState.prototype.create.call(this);
-		new flixel_text_FlxText(0,0,0,"Hello World",32);
+		this.add(new flixel_text_FlxText(0,0,0,"Hello World",32));
 	}
 	,update: function(elapsed) {
 		flixel_FlxState.prototype.update.call(this,elapsed);
@@ -70058,7 +70058,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 206597;
+	this.version = 512017;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
