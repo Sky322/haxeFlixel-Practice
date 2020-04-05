@@ -895,9 +895,9 @@ ApplicationMain.create = function(config) {
 	ManifestResources.init(config);
 	var _this = app.meta;
 	if(__map_reserved["build"] != null) {
-		_this.setReserved("build","4");
+		_this.setReserved("build","5");
 	} else {
-		_this.h["build"] = "4";
+		_this.h["build"] = "5";
 	}
 	var _this1 = app.meta;
 	if(__map_reserved["company"] != null) {
@@ -5878,7 +5878,7 @@ PlayState.__super__ = flixel_FlxState;
 PlayState.prototype = $extend(flixel_FlxState.prototype,{
 	create: function() {
 		flixel_FlxState.prototype.create.call(this);
-		this.add(new flixel_text_FlxText(0,0,0,"Hello World",32));
+		this.add(new flixel_text_FlxText(200,200,0,"Hello World",32));
 	}
 	,update: function(elapsed) {
 		flixel_FlxState.prototype.update.call(this,elapsed);
