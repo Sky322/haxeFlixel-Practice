@@ -1,12 +1,17 @@
 package;
 
+import haxe.display.Protocol.HaxeResponseErrorData;
 import flixel.FlxState;
 import flixel.text.FlxText;
+//import Hero;
 
 class PlayState extends FlxState
 {
+	static private var hero:Hero;
 	override public function create()
-	{
+	{hero = new Hero(15,15)
+		;
+		add(hero);
 		super.create();
 		add(new FlxText(200,200,0,"Hello World", 32));
 	}
