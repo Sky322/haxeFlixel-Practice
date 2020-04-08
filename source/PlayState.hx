@@ -3,13 +3,12 @@ package;
 import haxe.display.Protocol.HaxeResponseErrorData;
 import flixel.FlxState;
 import flixel.text.FlxText;
-//import Hero;
 
 class PlayState extends FlxState
 {
 	static private var hero:Hero;
 	override public function create()
-	{hero = new Hero(15,15)
+	{hero = new Hero(350,350)
 		;
 		add(hero);
 		super.create();
