@@ -14,12 +14,15 @@ class PlayState extends FlxState
 	private static var WALL_START_X(default, never) = 0;
 	private static var WALL_START_Y(default, never) = 20;
 
-	private static var FIREBALL_COUNT(default, never) = 25;
+	private static var FIREBALL_COUNT(default, never) = 30;
 	private static var FIREBALL_SPAWN_BORDER(default, never) = 50;
 
 	private var hero:Hero;
 	private var walls:FlxTypedGroup<Wall>;
 	private var fireballs:FlxTypedGroup<Fireball>;
+
+	var ending:Bool;
+	var won:Bool;
 
 	override public function create():Void
 	{
@@ -69,6 +72,8 @@ class PlayState extends FlxState
 		screenWrapObject(hero);
 		for (fireball in fireballs) {
 			screenWrapObject(fireball);
+
+		ifEnding();
 		}
 	}
 
@@ -93,5 +98,11 @@ class PlayState extends FlxState
 		trace("Hero and Fireball collided!");
 		fireball.kill();
 		hero.kill();
+		ending = true;
 	}
+
+	private function ifEnding()
+		if (ending){
+			FlxG.switchState(new GameOverState());
+		}
 }
