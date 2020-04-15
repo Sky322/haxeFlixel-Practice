@@ -1,11 +1,13 @@
 package;
 
+import js.lib.webassembly.Global;
 import Fireball;
 import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import Hero;
 import Wall;
+import Goal;
 import flixel.FlxState;
 
 class PlayState extends FlxState
@@ -14,12 +16,13 @@ class PlayState extends FlxState
 	private static var WALL_START_X(default, never) = 0;
 	private static var WALL_START_Y(default, never) = 20;
 
-	private static var FIREBALL_COUNT(default, never) = 30;
-	private static var FIREBALL_SPAWN_BORDER(default, never) = 50;
+	private static var FIREBALL_COUNT(default, never) = 70;
+	private static var FIREBALL_SPAWN_BORDER(default, never) = 60;
 
 	private var hero:Hero;
 	private var walls:FlxTypedGroup<Wall>;
 	private var fireballs:FlxTypedGroup<Fireball>;
+	private var goal:Goal;
 
 	var ending:Bool;
 	var won:Bool;
@@ -28,8 +31,11 @@ class PlayState extends FlxState
 	{
 		super.create();
 
-		hero = new Hero();
+		hero = new Hero(200);
 		add(hero);
+
+		goal = new Goal(400,60);
+		add(goal);
 
 		initializeWalls();
 		initializeFireballs();
@@ -51,8 +57,8 @@ class PlayState extends FlxState
 		fireballs = new FlxTypedGroup<Fireball>();
 
 		for (i in 0...FIREBALL_COUNT) {
-			var x:Float = FlxG.random.int(FIREBALL_SPAWN_BORDER, 
-				FlxG.width - FIREBALL_SPAWN_BORDER);
+			var x:Float = FlxG.random.int(1, 
+				FlxG.width - 1);
 			var y:Float = FlxG.random.int(FIREBALL_SPAWN_BORDER, 
 				FlxG.height - FIREBALL_SPAWN_BORDER);
 			var fireball = new Fireball(x, y);
@@ -69,11 +75,14 @@ class PlayState extends FlxState
 
 		FlxG.overlap(hero, fireballs, resolveHeroFireballOverlap);
 
+		FlxG.overlap(hero, goal, heroGoalOverlap);
+
 		screenWrapObject(hero);
 		for (fireball in fireballs) {
 			screenWrapObject(fireball);
 
 		ifEnding();
+		ifWon();
 		}
 	}
 
@@ -101,8 +110,20 @@ class PlayState extends FlxState
 		ending = true;
 	}
 
-	private function ifEnding()
+	private function heroGoalOverlap(hero:Hero, goal:Goal) {
+		trace("Hero and Goal collided!");
+		goal.kill();
+		won = true;
+	}
+
+	private function ifEnding(){
 		if (ending){
 			FlxG.switchState(new GameOverState());
 		}
+	}
+	private function ifWon(){
+		if (won){
+			FlxG.switchState(new GameWonState());
+		}
+	}
 }
