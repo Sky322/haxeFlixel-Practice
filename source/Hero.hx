@@ -52,7 +52,7 @@ class Hero extends FlxSprite{
             this.color = 0x0000ff;
         }
         else if (x<250 && y>250){
-            this.color = 0xf0f0f0;
+            this.color = 0xf0f000;
         }
         movement();
         super.update(elapsed);
