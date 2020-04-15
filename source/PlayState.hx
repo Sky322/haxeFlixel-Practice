@@ -19,6 +19,8 @@ class PlayState extends FlxState
 	private static var FIREBALL_COUNT(default, never) = 70;
 	private static var FIREBALL_SPAWN_BORDER(default, never) = 60;
 
+	private var goalStart = FlxG.random.int(10, FlxG.width - 10);
+
 	private var hero:Hero;
 	private var walls:FlxTypedGroup<Wall>;
 	private var fireballs:FlxTypedGroup<Fireball>;
@@ -34,7 +36,7 @@ class PlayState extends FlxState
 		hero = new Hero(200);
 		add(hero);
 
-		goal = new Goal(400,60);
+		goal = new Goal(goalStart,55);
 		add(goal);
 
 		initializeWalls();
