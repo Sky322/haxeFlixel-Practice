@@ -1,6 +1,5 @@
 package;
 
-import js.lib.webassembly.Global;
 import Fireball;
 import flixel.FlxObject;
 import flixel.FlxG;
@@ -82,10 +81,10 @@ class PlayState extends FlxState
 		screenWrapObject(hero);
 		for (fireball in fireballs) {
 			screenWrapObject(fireball);
+		}
 
 		ifEnding();
 		ifWon();
-		}
 	}
 
 	private function screenWrapObject(wrappingObject:FlxObject) {
